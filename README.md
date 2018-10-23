@@ -3,7 +3,7 @@
 **Paul, Florent, Hugo, Chloé, Alexandre Beauquel**
 Capteur : Humidité 
 
-##Lien des gits## 
+## Lien des gits
 Serveur php : https://github.com/abeauquel/projet-capture-serveur-php
 Serveur nodejs : https://github.com/abeauquel/projet-capture-serveur-nodejs
 Application android : 
