@@ -30,10 +30,6 @@ public class NavigateurDesVues extends Application {
         controleur = Controleur.getInstance();
         controleur.activerVues(this);
 
-        //TEST
-       /* this.naviguerVersVueAjouterLieu();
-        this.naviguerVersVueLieu();*/
-
         //ACEUILL
         this.naviguerVersVueHumidite();
     }
