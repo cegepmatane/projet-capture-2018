@@ -11,6 +11,6 @@ Serveur nodejs : https://github.com/abeauquel/projet-capture-serveur-nodejs
 <br/>
 Application android : 
 <br/>
-Application javafx
+Application javafx : https://github.com/cegepmatane/projet-capture-2018
 <br/>
-projet-capture-2018-pinard67 created by GitHub Classroom
+
