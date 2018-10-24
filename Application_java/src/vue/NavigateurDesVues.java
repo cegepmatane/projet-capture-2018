@@ -2,6 +2,7 @@ package vue;
 
 import controleur.Controleur;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class NavigateurDesVues extends Application {
@@ -21,6 +22,9 @@ public class NavigateurDesVues extends Application {
         this.stade = stade;
 
         stade.setScene(this.vueHumidite);
+        stade.getIcons().add(new Image("water_drop.png"));
+        stade.setTitle("Humidite Matane");
+        stade.setResizable(false);
         stade.show();
 
         controleur = Controleur.getInstance();
