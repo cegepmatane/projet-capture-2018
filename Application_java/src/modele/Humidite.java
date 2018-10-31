@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 
 public class Humidite {
     private int id;
-    private double valeur;
+    private double moyene, maximum, minimum;
     private LocalDateTime date;
 
-    public Humidite(int id, double valeur, LocalDateTime date) {
+    public Humidite(int id, double moyene, double maximum, double minimum, LocalDateTime date) {
         this.id = id;
-        this.valeur = valeur;
+        this.moyene = moyene;
+        this.maximum = maximum;
+        this.minimum = minimum;
         this.date = date;
     }
 
@@ -21,12 +23,28 @@ public class Humidite {
         this.id = id;
     }
 
-    public double getValeur() {
-        return valeur;
+    public double getMoyene() {
+        return moyene;
     }
 
-    public void setValeur(double valeur) {
-        this.valeur = valeur;
+    public void setMoyene(double moyene) {
+        this.moyene = moyene;
+    }
+
+    public double getMaximum() {
+        return maximum;
+    }
+
+    public void setMaximum(double maximum) {
+        this.maximum = maximum;
+    }
+
+    public double getMinimum() {
+        return minimum;
+    }
+
+    public void setMinimum(double minimum) {
+        this.minimum = minimum;
     }
 
     public LocalDateTime getDate() {
