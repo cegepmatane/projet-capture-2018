@@ -60,28 +60,29 @@ public class VueHumidite extends Scene {
 
         tableau.setEditable(false);
 
+        TableColumn colonedate = new TableColumn("Date");
+        colonedate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colonedate.setResizable(false);
+        colonedate.setMinWidth(240);
+
         TableColumn coloneMoyenne = new TableColumn("Moyenne");
         coloneMoyenne.setCellValueFactory(new PropertyValueFactory<>("moyene"));
         coloneMoyenne.setResizable(false);
-        coloneMoyenne.setMinWidth(320);
+        coloneMoyenne.setMinWidth(240);
 
         TableColumn coloneMin = new TableColumn("Minimum");
         coloneMin.setCellValueFactory(new PropertyValueFactory<>("minimum"));
         coloneMin.setResizable(false);
-        coloneMin.setMinWidth(320);
+        coloneMin.setMinWidth(240);
 
         TableColumn coloneMax = new TableColumn("Maximum");
         coloneMax.setCellValueFactory(new PropertyValueFactory<>("maximum"));
         coloneMax.setResizable(false);
-        coloneMax.setMinWidth(320);
+        coloneMax.setMinWidth(240);
 
         tableau.setMinWidth(960);
         tableau.setId("tableau-humidite");
-        tableau.getColumns().addAll(coloneMoyenne, coloneMin, coloneMax);
-
-        /*LigneTableau ligne = new LigneTableau(34, 55.4, 1.2);
-        tableau.getItems().add(ligne);*/
-
+        tableau.getColumns().addAll(colonedate,coloneMoyenne, coloneMin, coloneMax);
 
         for (LigneTableau ligne: humiditeDAO.listerHumidite().recupererLignesPourTableau()) {
             tableau.getItems().add(ligne);
