@@ -1,11 +1,17 @@
 package modele;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Humidite {
     private int id;
     private double moyene, maximum, minimum;
     private LocalDateTime date;
+
+    public static final DateTimeFormatter formatMinute = DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm") ;
+    public static final DateTimeFormatter formatJour = DateTimeFormatter.ofPattern("MM/dd/yyyy") ;
+    public static final DateTimeFormatter formatSemaine = DateTimeFormatter.ofPattern("MM/dd/yyyy") ;
+    public static final DateTimeFormatter formatMois = DateTimeFormatter.ofPattern("MM/yyyy") ;
 
     public Humidite(int id, double moyene, double maximum, double minimum, LocalDateTime date) {
         this.id = id;
