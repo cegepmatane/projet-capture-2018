@@ -1,5 +1,6 @@
 package vue;
 
+import accesseur.HumiditeDAO;
 import controleur.Controleur;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
@@ -26,6 +27,9 @@ public class VueHumidite extends Scene {
     Controleur controleur;
     ChoiceBox<String> boiteChoix;
     TableView<LigneTableau> tableau;
+
+
+    HumiditeDAO humiditeDAO = new HumiditeDAO();
 
     public VueHumidite() {
         super(new Pane(), 1060, 650);
@@ -75,8 +79,14 @@ public class VueHumidite extends Scene {
         tableau.setId("tableau-humidite");
         tableau.getColumns().addAll(coloneMoyenne, coloneMin, coloneMax);
 
-        LigneTableau ligne = new LigneTableau(34, 55.4, 1.2);
-        tableau.getItems().add(ligne);
+        /*LigneTableau ligne = new LigneTableau(34, 55.4, 1.2);
+        tableau.getItems().add(ligne);*/
+
+
+        for (LigneTableau ligne: humiditeDAO.listerHumidite().recupererLignesPourTableau()) {
+            tableau.getItems().add(ligne);
+        }
+
 
         //grille.setVgap(50);
         general.setPadding(new Insets(50));
