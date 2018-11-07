@@ -2,12 +2,7 @@ package vue;
 
 import accesseur.HumiditeDAO;
 import controleur.Controleur;
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -37,7 +32,7 @@ public class VueHumidite extends Scene {
 
         super.getStylesheets().add("style/style.css");
 
-        humiditeDAO.printXML();
+        humiditeDAO.parseXML();
         this.panneau = (Pane) this.getRoot();
 
         info = new VBox();

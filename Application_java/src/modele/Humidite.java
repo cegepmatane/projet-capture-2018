@@ -6,14 +6,9 @@ import java.time.format.DateTimeFormatter;
 public class Humidite {
     private int id;
     private double moyene, maximum, minimum;
-    private LocalDateTime date;
+    private String date;
 
-    public static final DateTimeFormatter formatMinute = DateTimeFormatter.ofPattern("MM/dd/yyyy - HH:mm") ;
-    public static final DateTimeFormatter formatJour = DateTimeFormatter.ofPattern("MM/dd/yyyy") ;
-    public static final DateTimeFormatter formatSemaine = DateTimeFormatter.ofPattern("MM/dd/yyyy") ;
-    public static final DateTimeFormatter formatMois = DateTimeFormatter.ofPattern("MM/yyyy") ;
-
-    public Humidite(int id, double moyene, double maximum, double minimum, LocalDateTime date) {
+    public Humidite(int id, double moyene, double maximum, double minimum, String date) {
         this.id = id;
         this.moyene = moyene;
         this.maximum = maximum;
@@ -53,11 +48,11 @@ public class Humidite {
         this.minimum = minimum;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

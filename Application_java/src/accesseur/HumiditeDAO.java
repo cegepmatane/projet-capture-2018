@@ -13,13 +13,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 
-import static accesseur.Connection.URL_BASE;
+import static accesseur.Connection.*;
 
 
 public class HumiditeDAO {
 
+    private Humidites listeHumidite = new Humidites();
+
     public Humidites listerHumidite() {
-        Humidites listeHumidite = new Humidites();
+
         listeHumidite.add(new Humidite(0, 12.5, 20, 6, LocalDateTime.now()));
         listeHumidite.add(new Humidite(1, 23.1, 40.1, -1.3, LocalDateTime.now()));
         listeHumidite.add(new Humidite(2, 5, 10, 0, LocalDateTime.now()));
@@ -27,7 +29,7 @@ public class HumiditeDAO {
         return listeHumidite;
     }
 
-    public void printXML() {
+    public void parseXML() {
 
         try
         {
@@ -41,7 +43,27 @@ public class HumiditeDAO {
             System.out.println ("Root element: " +
                     doc.getDocumentElement().getNodeName());
 
-            System.out.println(description(racine,""));
+            //System.out.println(description(racine,""));
+            NodeList listeNoeud = doc.getElementsByTagName("humidite");
+
+            for (int iterateur = 0; iterateur < listeNoeud.getLength(); iterateur++) {
+
+                Node noeud = listeNoeud.item(iterateur);
+
+                System.out.println("\nCurrent Element :" + noeud.getNodeName());
+
+                if (noeud.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element eElement = (Element) noeud;
+
+                    System.out.println("Moyenne : " + eElement.getElementsByTagName(CHAMP_MOYENNE).item(0).getTextContent());
+                    System.out.println("Max : " + eElement.getElementsByTagName(CHAMP_MAX).item(0).getTextContent());
+                    System.out.println("Min : " + eElement.getElementsByTagName(CHAMP_MIN).item(0).getTextContent());
+                    System.out.println("Nombre d'humidite : " + eElement.getElementsByTagName(CHAMP_NOMBRE).item(0).getTextContent());
+                    System.out.println("Date : " + eElement.getElementsByTagName(CHAMP_DATE).item(0).getTextContent());
+
+                }
+            }
 
         }
         catch (Exception e)
@@ -51,7 +73,7 @@ public class HumiditeDAO {
 
     }
 
-    public static String description(Node n, String tab){
+    private String description(Node n, String tab){
         String str = new String();
         //Nous nous assurons que le nœud passé en paramètre est une instance d'Element
         //juste au cas où il s'agisse d'un texte ou d'un espace, etc.
@@ -96,6 +118,7 @@ public class HumiditeDAO {
 
             //nous parcourons la liste des nœuds
             for(int i = 0; i < nbChild; i++){
+
                 Node n2 = list.item(i);
 
                 //si le nœud enfant est un Element, nous le traitons
