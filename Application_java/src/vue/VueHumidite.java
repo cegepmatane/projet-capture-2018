@@ -4,6 +4,7 @@ import accesseur.HumiditeDAO;
 import controleur.Controleur;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
@@ -36,6 +37,7 @@ public class VueHumidite extends Scene {
 
         super.getStylesheets().add("style/style.css");
 
+        humiditeDAO.printXML();
         this.panneau = (Pane) this.getRoot();
 
         info = new VBox();
@@ -49,10 +51,12 @@ public class VueHumidite extends Scene {
         boiteChoix.getItems().add("Mois");
         boiteChoix.getSelectionModel().selectFirst();
 
-        /*boiteChoix.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+
+        //TODO LISTENER CHOICE BOX
+        /*boiteChoix.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
-                System.out.println(box.getItems().get((Integer) number2));
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
             }
         });*/
 
