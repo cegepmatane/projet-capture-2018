@@ -32,7 +32,7 @@ public class VueHumidite extends Scene {
 
         super.getStylesheets().add("style/style.css");
 
-        humiditeDAO.parseXML();
+        humiditeDAO.listerHumiditeLOCAL();
         this.panneau = (Pane) this.getRoot();
 
         info = new VBox();
@@ -83,7 +83,7 @@ public class VueHumidite extends Scene {
         tableau.setId("tableau-humidite");
         tableau.getColumns().addAll(colonedate,coloneMoyenne, coloneMin, coloneMax);
 
-        for (LigneTableau ligne: humiditeDAO.listerHumidite().recupererLignesPourTableau()) {
+        for (LigneTableau ligne: humiditeDAO.listerToutesHumidite().recupererLignesPourTableau()) {
             tableau.getItems().add(ligne);
         }
 

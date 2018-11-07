@@ -1,27 +1,24 @@
 package modele;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Humidite {
-    private int id;
+    private int nombre;
     private double moyene, maximum, minimum;
     private String date;
 
-    public Humidite(int id, double moyene, double maximum, double minimum, String date) {
-        this.id = id;
+    public Humidite(int nombre, double moyene, double maximum, double minimum, String date) {
+        this.nombre = nombre;
         this.moyene = moyene;
         this.maximum = maximum;
         this.minimum = minimum;
         this.date = date;
     }
 
-    public int getId() {
-        return id;
+    public int getNombre() {
+        return nombre;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNombre(int nombre) {
+        this.nombre = nombre;
     }
 
     public double getMoyene() {

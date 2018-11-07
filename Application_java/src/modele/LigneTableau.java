@@ -1,26 +1,18 @@
 package modele;
 
 public class LigneTableau {
-    double moyene;
-    double maximum;
-    double minimum;
-    String date;
+    private double moyene,maximum,minimum;
+    private String date;
+    private int nombre;
 
     public LigneTableau(){}
 
-    public LigneTableau(String date, double moyene, double maximum, double minimum) {
-        this.date = date;
+    public LigneTableau(double moyene, double maximum, double minimum, String date, int nombre) {
         this.moyene = moyene;
         this.maximum = maximum;
         this.minimum = minimum;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
         this.date = date;
+        this.nombre = nombre;
     }
 
     public double getMoyene() {
@@ -45,5 +37,21 @@ public class LigneTableau {
 
     public void setMinimum(double minimum) {
         this.minimum = minimum;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(int nombre) {
+        this.nombre = nombre;
     }
 }
