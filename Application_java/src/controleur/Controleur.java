@@ -4,6 +4,9 @@ import accesseur.HumiditeDAO;
 import vue.NavigateurDesVues;
 import vue.VueHumidite;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static accesseur.Connection.URL_BASE;
@@ -13,7 +16,8 @@ public class Controleur {
     private VueHumidite vueHumidite;
     private HumiditeDAO humiditeDAO = new HumiditeDAO();
 
-    private Controleur() {}
+    private Controleur() {
+    }
 
     private static Controleur instance = null;
 
@@ -23,6 +27,7 @@ public class Controleur {
         }
         return instance;
     }
+
     public void activerVues(NavigateurDesVues navigateurDesVues) {
 
         this.navigateurDesVues = navigateurDesVues;
@@ -39,7 +44,17 @@ public class Controleur {
         String dateDebut = navigateurDesVues.getVueHumidite().getDateChoixDebut().getValue().toString();
         String dateFin = navigateurDesVues.getVueHumidite().getDateChoixFin().getValue().toString();
 
-        url += "/"+echantillonnage;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateDebutFormat = null;
+        Date dateFinFormat = null;
+        try {
+            dateDebutFormat = new Date(sdf.parse(dateDebut).getTime());
+            dateFinFormat = new Date(sdf.parse(dateFin).getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        url += "/" + echantillonnage + "/" + (dateDebutFormat.getTime()/1000) + "/" + (dateFinFormat.getTime()/1000);
 
         System.out.println(url);
 

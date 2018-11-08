@@ -59,6 +59,7 @@ public class VueHumidite extends Scene {
         boiteChoix.getItems().add("jour");
         boiteChoix.getItems().add("semaine");
         boiteChoix.getItems().add("mois");
+        boiteChoix.getItems().add("annee");
         boiteChoix.getSelectionModel().selectFirst();
 
         dateChoixDebut = new DatePicker();
@@ -73,6 +74,7 @@ public class VueHumidite extends Scene {
                 controleur.notifierActualiser();
             }
         });
+
         this.tableau = new TableView();
 
         tableau.setEditable(false);
