@@ -4,15 +4,14 @@ import accesseur.HumiditeDAO;
 import controleur.Controleur;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import modele.LigneTableau;
+
+import java.time.LocalDate;
 
 public class VueHumidite extends Scene {
     Pane panneau;
@@ -24,6 +23,8 @@ public class VueHumidite extends Scene {
     ChoiceBox<String> boiteChoix;
     TableView<LigneTableau> tableau;
 
+    DatePicker dateChoixDebut = new DatePicker();
+    DatePicker dateChoixFin = new DatePicker();
 
     HumiditeDAO humiditeDAO = new HumiditeDAO();
 
@@ -45,6 +46,8 @@ public class VueHumidite extends Scene {
         boiteChoix.getItems().add("Semaine");
         boiteChoix.getItems().add("Mois");
         boiteChoix.getSelectionModel().selectFirst();
+        dateChoixDebut.setValue(LocalDate.now());
+        dateChoixFin.setValue(LocalDate.now().plusDays(7));
 
 
         //TODO LISTENER CHOICE BOX
@@ -94,6 +97,10 @@ public class VueHumidite extends Scene {
         grille.add(new Label("Vue Humiditée :"),0,0);
         grille.add(new Label("Echantillonage :"),0,1);
         grille.add(boiteChoix,1,1);
+        grille.add(new Label("Date de début :"),0,2);
+        grille.add(dateChoixDebut,1,2);
+        grille.add(new Label("Date de fin :"),0,3);
+        grille.add(dateChoixFin,1,3);
         info.getChildren().add(tableau);
 
         general.getChildren().add(grille);
