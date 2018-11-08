@@ -51,8 +51,6 @@ public class HumiditeDAO {
 
                 Node noeud = listeNoeud.item(iterateur);
 
-                System.out.println("\nCurrent Element :" + noeud.getNodeName());
-
                 if (noeud.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element eElement = (Element) noeud;

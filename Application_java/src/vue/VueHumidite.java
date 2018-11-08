@@ -2,6 +2,8 @@ package vue;
 
 import accesseur.HumiditeDAO;
 import controleur.Controleur;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -33,7 +35,6 @@ public class VueHumidite extends Scene {
 
         super.getStylesheets().add("style/style.css");
 
-        humiditeDAO.listerHumiditeLOCAL();
         this.panneau = (Pane) this.getRoot();
 
         info = new VBox();
@@ -42,54 +43,57 @@ public class VueHumidite extends Scene {
         controleur = Controleur.getInstance();
 
         boiteChoix = new ChoiceBox<String>();
+        boiteChoix.getItems().add("Seconde");
+        boiteChoix.getItems().add("Minute");
+        boiteChoix.getItems().add("Heure");
         boiteChoix.getItems().add("Jours");
         boiteChoix.getItems().add("Semaine");
         boiteChoix.getItems().add("Mois");
         boiteChoix.getSelectionModel().selectFirst();
+
         dateChoixDebut.setValue(LocalDate.now());
         dateChoixFin.setValue(LocalDate.now().plusDays(7));
 
 
         //TODO LISTENER CHOICE BOX
-        /*boiteChoix.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 
-            }
-        });*/
 
         this.tableau = new TableView();
 
         tableau.setEditable(false);
 
-        TableColumn colonedate = new TableColumn("Date");
-        colonedate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        colonedate.setResizable(false);
-        colonedate.setMinWidth(240);
+        TableColumn coloneDate = new TableColumn("Date");
+        coloneDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        coloneDate.setResizable(false);
+        coloneDate.setMinWidth(192);
 
         TableColumn coloneMoyenne = new TableColumn("Moyenne");
         coloneMoyenne.setCellValueFactory(new PropertyValueFactory<>("moyene"));
         coloneMoyenne.setResizable(false);
-        coloneMoyenne.setMinWidth(240);
+        coloneMoyenne.setMinWidth(192);
 
         TableColumn coloneMin = new TableColumn("Minimum");
         coloneMin.setCellValueFactory(new PropertyValueFactory<>("minimum"));
         coloneMin.setResizable(false);
-        coloneMin.setMinWidth(240);
+        coloneMin.setMinWidth(192);
 
         TableColumn coloneMax = new TableColumn("Maximum");
         coloneMax.setCellValueFactory(new PropertyValueFactory<>("maximum"));
         coloneMax.setResizable(false);
-        coloneMax.setMinWidth(240);
+        coloneMax.setMinWidth(192);
+
+        TableColumn coloneNombre = new TableColumn("Nombre de valeur calculé");
+        coloneNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        coloneNombre.setResizable(false);
+        coloneNombre.setMinWidth(192);
 
         tableau.setMinWidth(960);
         tableau.setId("tableau-humidite");
-        tableau.getColumns().addAll(colonedate,coloneMoyenne, coloneMin, coloneMax);
+        tableau.getColumns().addAll(coloneDate,coloneMoyenne, coloneMin, coloneMax,coloneNombre);
 
         for (LigneTableau ligne: humiditeDAO.listerToutesHumidite().recupererLignesPourTableau()) {
             tableau.getItems().add(ligne);
         }
-
 
         //grille.setVgap(50);
         general.setPadding(new Insets(50));
