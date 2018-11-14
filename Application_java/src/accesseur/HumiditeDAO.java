@@ -62,7 +62,7 @@ public class HumiditeDAO {
 
                     Humidite humidite = new Humidite(nombre,moyenne,max,min,date);
                     this.listeHumidite.add(humidite);
-                    LOGGER.log(Level.INFO,"Humidite recus du XLM depuis service WEB -> "+ humidite.toString());
+                    LOGGER.log(Level.INFO,"Prse XML vers Humidite -> "+ humidite.toString());
                 }
             }
 

@@ -24,7 +24,9 @@ public class NavigateurDesVues extends Application {
         stade.setScene(this.vueHumidite);
         stade.getIcons().add(new Image("water_drop.png"));
         stade.setTitle("Humidite Matane");
-        stade.setResizable(false);
+        stade.setMinWidth(1060);
+        stade.setMinHeight(650);
+
         stade.show();
 
         controleur = Controleur.getInstance();

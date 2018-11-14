@@ -6,6 +6,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,13 +34,13 @@ public class VueHumidite extends Scene {
 
     DatePicker dateChoixDebut;
     DatePicker dateChoixFin;
-
+    ScrollBar scrollBar;
     Button actionActualiser;
 
     HumiditeDAO humiditeDAO = new HumiditeDAO();
 
     public VueHumidite() {
-        super(new Pane(), 1060, 650);
+        super(new Pane(), 1060, 700);
         super.getStylesheets().add("style/style.css");
 
         this.panneau = (Pane) this.getRoot();
