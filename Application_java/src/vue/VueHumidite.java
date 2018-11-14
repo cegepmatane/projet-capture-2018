@@ -17,6 +17,9 @@ import modele.Humidites;
 import modele.LigneTableau;
 
 import java.time.LocalDate;
+import java.util.logging.Level;
+
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 public class VueHumidite extends Scene {
     Pane panneau;
@@ -79,6 +82,14 @@ public class VueHumidite extends Scene {
 
 
         //grille.setVgap(50);
+        initPanneaux(listeHumidite.size() == 0);
+    }
+
+    private void initPanneaux(boolean estVide){
+        grille.getChildren().clear();
+        general.getChildren().clear();
+        panneau.getChildren().clear();
+
         general.setPadding(new Insets(50));
         grille.setVgap(21);
         grille.add(new Label("Vue Humiditée :"), 0, 0);
@@ -91,13 +102,19 @@ public class VueHumidite extends Scene {
         grille.add(actionActualiser, 1, 4);
 
         general.getChildren().add(grille);
-        general.getChildren().add(tableau);
+
+        if (estVide){
+            general.getChildren().add(new Label("La periode choisie ne contient aucune donnée."));
+        }else{
+            general.setSpacing(20);
+            general.getChildren().add(tableau);
+        }
+        LOGGER.log(Level.INFO, "Affichage mise a jour.");
         panneau.getChildren().add(general);
     }
 
     public void actualiserTableau(Humidites listeHumidite){
         info.getChildren().clear();
-
         this.tableau = new TableView();
 
         tableau.setEditable(false);
@@ -136,6 +153,8 @@ public class VueHumidite extends Scene {
         }
 
         info.getChildren().add(tableau);
+
+        initPanneaux(listeHumidite.size() == 0);
     }
 
 

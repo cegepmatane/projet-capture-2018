@@ -85,7 +85,7 @@ public class HumiditeDAO {
 
             doc.getDocumentElement().normalize();
             Element racine = doc.getDocumentElement();
-            System.out.println ("Root element: " + racine.getNodeName());
+            LOGGER.log(Level.INFO,"Reception du XML : " + racine.getNodeName());
 
             //System.out.println(description(racine,""));
             NodeList listeNoeud = doc.getElementsByTagName("humidite");
@@ -106,15 +106,14 @@ public class HumiditeDAO {
 
                     Humidite humidite = new Humidite(nombre,moyenne,max,min,date);
                     this.listeHumidite.add(humidite);
-                    LOGGER.log(Level.INFO,"Humidite recus du XLM depuis service WEB -> "+ humidite.toString());
+                    LOGGER.log(Level.INFO,"Prse XML vers Humidite -> "+ humidite.toString());
                 }
             }
 
         }
         catch (Exception e)
         {
-            e.printStackTrace();
-            System.out.println("error");
+            LOGGER.log(Level.SEVERE, "ERREUR: Impossible d'accéder a cette url :" + url);
         }
 
         return this.listeHumidite;

@@ -8,7 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 
+import static accesseur.Connection.LOGGER;
 import static accesseur.Connection.URL_BASE;
 
 public class Controleur {
@@ -49,7 +51,9 @@ public class Controleur {
         Date dateFinFormat = null;
         try {
             dateDebutFormat = new Date(sdf.parse(dateDebut).getTime());
+            LOGGER.log(Level.INFO, "TimeStamp date 1 : " + dateDebutFormat);
             dateFinFormat = new Date(sdf.parse(dateFin).getTime());
+            LOGGER.log(Level.INFO, "TimeStamp date 2 : " + dateFinFormat);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -57,5 +61,7 @@ public class Controleur {
         url += "/" + echantillonnage + "/" + (dateDebutFormat.getTime()/1000) + "/" + (dateFinFormat.getTime()/1000);
 
         navigateurDesVues.getVueHumidite().actualiserTableau(humiditeDAO.listerHumiditeSelonURL(url));
+
+        LOGGER.log(Level.INFO, "Get XML depuis URL : "+ url.toString());
     }
 }
