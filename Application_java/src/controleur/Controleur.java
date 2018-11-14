@@ -56,8 +56,6 @@ public class Controleur {
 
         url += "/" + echantillonnage + "/" + (dateDebutFormat.getTime()/1000) + "/" + (dateFinFormat.getTime()/1000);
 
-        System.out.println(url);
-
-        navigateurDesVues.getVueHumidite().afficher(humiditeDAO.listerHumiditeSelonURL(url));
+        navigateurDesVues.getVueHumidite().actualiserTableau(humiditeDAO.listerHumiditeSelonURL(url));
     }
 }

@@ -4,12 +4,14 @@ import modele.Humidite;
 import modele.Humidites;
 import org.w3c.dom.*;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import static accesseur.Connection.*;
 
 public class HumiditeDAO {
-
     private Humidites listeHumidite = new Humidites();
 
     public Humidites listerHumiditeLOCAL() {
@@ -48,7 +50,7 @@ public class HumiditeDAO {
 
                     /*System.out.println("Moyenne : " + eElement.getElementsByTagName(CHAMP_MOYENNE).item(0).getTextContent());
                     System.out.println("Max : " + eElement.getElementsByTagName(CHAMP_MAX).item(0).getTextContent());
-                    System.out.println("Min : " + eElement.getElementsByTagName(CHAMP_MIN).item(0).getTextContent());
+                    Sys.dtem.out.println("Min : " + eElement.getElementsByTagName(CHAMP_MIN).item(0).getTextContent());
                     System.out.println("Nombre d'humidite : " + eElement.getElementsByTagName(CHAMP_NOMBRE).item(0).getTextContent());
                     System.out.println("Date : " + eElement.getElementsByTagName(CHAMP_DATE).item(0).getTextContent());*/
 
@@ -58,7 +60,9 @@ public class HumiditeDAO {
                     int nombre = Integer.parseInt(eElement.getElementsByTagName(CHAMP_NOMBRE).item(0).getTextContent());
                     String date = eElement.getElementsByTagName(CHAMP_DATE).item(0).getTextContent();
 
-                    this.listeHumidite.add(new Humidite(nombre,moyenne,max,min,date));
+                    Humidite humidite = new Humidite(nombre,moyenne,max,min,date);
+                    this.listeHumidite.add(humidite);
+                    LOGGER.log(Level.INFO,"Humidite recus du XLM depuis service WEB -> "+ humidite.toString());
                 }
             }
 
@@ -74,17 +78,14 @@ public class HumiditeDAO {
     public Humidites listerHumiditeSelonURL(String url) {
         this.listeHumidite.clear();
 
-        try
-        {
-            DocumentBuilderFactory f =
-                    DocumentBuilderFactory.newInstance();
+        try {
+            DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
             DocumentBuilder b = f.newDocumentBuilder();
             Document doc = b.parse(url);
 
             doc.getDocumentElement().normalize();
             Element racine = doc.getDocumentElement();
-            System.out.println ("Root element: " +
-                    doc.getDocumentElement().getNodeName());
+            System.out.println ("Root element: " + racine.getNodeName());
 
             //System.out.println(description(racine,""));
             NodeList listeNoeud = doc.getElementsByTagName("humidite");
@@ -97,19 +98,15 @@ public class HumiditeDAO {
 
                     Element eElement = (Element) noeud;
 
-                    /*System.out.println("Moyenne : " + eElement.getElementsByTagName(CHAMP_MOYENNE).item(0).getTextContent());
-                    System.out.println("Max : " + eElement.getElementsByTagName(CHAMP_MAX).item(0).getTextContent());
-                    System.out.println("Min : " + eElement.getElementsByTagName(CHAMP_MIN).item(0).getTextContent());
-                    System.out.println("Nombre d'humidite : " + eElement.getElementsByTagName(CHAMP_NOMBRE).item(0).getTextContent());
-                    System.out.println("Date : " + eElement.getElementsByTagName(CHAMP_DATE).item(0).getTextContent());*/
-
                     double moyenne = Double.parseDouble(eElement.getElementsByTagName(CHAMP_MOYENNE).item(0).getTextContent());
                     double max = Double.parseDouble(eElement.getElementsByTagName(CHAMP_MAX).item(0).getTextContent());
                     double min = Double.parseDouble(eElement.getElementsByTagName(CHAMP_MIN).item(0).getTextContent());
                     int nombre = Integer.parseInt(eElement.getElementsByTagName(CHAMP_NOMBRE).item(0).getTextContent());
                     String date = eElement.getElementsByTagName(CHAMP_DATE).item(0).getTextContent();
 
-                    this.listeHumidite.add(new Humidite(nombre,moyenne,max,min,date));
+                    Humidite humidite = new Humidite(nombre,moyenne,max,min,date);
+                    this.listeHumidite.add(humidite);
+                    LOGGER.log(Level.INFO,"Humidite recus du XLM depuis service WEB -> "+ humidite.toString());
                 }
             }
 
@@ -117,10 +114,17 @@ public class HumiditeDAO {
         catch (Exception e)
         {
             e.printStackTrace();
+            System.out.println("error");
         }
 
         return this.listeHumidite;
     }
+
+
+
+
+
+
 
     private String description(Node n, String tab){
         String str = new String();

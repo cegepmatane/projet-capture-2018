@@ -1,6 +1,10 @@
 package accesseur;
 
+import java.util.logging.Logger;
+
 public interface Connection {
+    public final static Logger LOGGER = Logger.getLogger("Log");
+
     final public static String URL_BASE = "http://54.39.145.59/projet-capture-serveur-php/humidites";
 
     final public static String CHAMP_MOYENNE = "moyenne";

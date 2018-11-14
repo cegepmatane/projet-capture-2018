@@ -75,6 +75,29 @@ public class VueHumidite extends Scene {
             }
         });
 
+        actualiserTableau(listeHumidite);
+
+
+        //grille.setVgap(50);
+        general.setPadding(new Insets(50));
+        grille.setVgap(21);
+        grille.add(new Label("Vue Humiditée :"), 0, 0);
+        grille.add(new Label("Echantillonage :"), 0, 1);
+        grille.add(boiteChoix, 1, 1);
+        grille.add(new Label("Date de début :"), 0, 2);
+        grille.add(dateChoixDebut, 1, 2);
+        grille.add(new Label("Date de fin :"), 0, 3);
+        grille.add(dateChoixFin, 1, 3);
+        grille.add(actionActualiser, 1, 4);
+
+        general.getChildren().add(grille);
+        general.getChildren().add(tableau);
+        panneau.getChildren().add(general);
+    }
+
+    public void actualiserTableau(Humidites listeHumidite){
+        info.getChildren().clear();
+
         this.tableau = new TableView();
 
         tableau.setEditable(false);
@@ -112,23 +135,10 @@ public class VueHumidite extends Scene {
             tableau.getItems().add(ligne);
         }
 
-        //grille.setVgap(50);
-        general.setPadding(new Insets(50));
-        grille.setVgap(21);
-        grille.add(new Label("Vue Humiditée :"), 0, 0);
-        grille.add(new Label("Echantillonage :"), 0, 1);
-        grille.add(boiteChoix, 1, 1);
-        grille.add(new Label("Date de début :"), 0, 2);
-        grille.add(dateChoixDebut, 1, 2);
-        grille.add(new Label("Date de fin :"), 0, 3);
-        grille.add(dateChoixFin, 1, 3);
-        grille.add(actionActualiser, 1, 4);
         info.getChildren().add(tableau);
-
-        general.getChildren().add(grille);
-        general.getChildren().add(tableau);
-        panneau.getChildren().add(general);
     }
+
+
 
     public ChoiceBox<String> getBoiteChoix() {
         return boiteChoix;

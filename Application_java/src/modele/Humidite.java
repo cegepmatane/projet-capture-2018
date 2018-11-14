@@ -52,4 +52,15 @@ public class Humidite {
     public void setDate(String date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Humidite{" +
+                "nombre=" + nombre +
+                ", moyene=" + moyene +
+                ", maximum=" + maximum +
+                ", minimum=" + minimum +
+                ", date='" + date + '\'' +
+                '}';
+    }
 }
