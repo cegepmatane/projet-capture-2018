@@ -6,6 +6,7 @@ import vue.VueHumidite;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -44,22 +45,28 @@ public class Controleur {
 
         String echantillonnage = navigateurDesVues.getVueHumidite().getBoiteChoix().getValue();
         String dateDebut = navigateurDesVues.getVueHumidite().getDateChoixDebut().getValue().toString();
-        String dateFin = navigateurDesVues.getVueHumidite().getDateChoixFin().getValue().toString();
+        LocalDate dateFin = navigateurDesVues.getVueHumidite().getDateChoixFin().getValue();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date dateDebutFormat = null;
         Date dateFinFormat = null;
+        Date dateAjourdhuiFormat = null;
         try {
             dateDebutFormat = new Date(sdf.parse(dateDebut).getTime());
             LOGGER.log(Level.INFO, "TimeStamp date 1 : " + dateDebutFormat);
-            dateFinFormat = new Date(sdf.parse(dateFin).getTime());
+            dateFinFormat = new Date(sdf.parse(dateFin.toString()).getTime());
             LOGGER.log(Level.INFO, "TimeStamp date 2 : " + dateFinFormat);
+
+            dateAjourdhuiFormat = new Date(sdf.parse(LocalDate.now().toString()).getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        url += "/" + echantillonnage + "/" + (dateDebutFormat.getTime()/1000) + "/" + (dateFinFormat.getTime()/1000);
-
+        if (LocalDate.now().isBefore(dateFin)) {
+            url += "/" + echantillonnage + "/" + (dateDebutFormat.getTime() / 1000) + "/" + (dateAjourdhuiFormat.getTime() / 1000);
+            vueHumidite.getDateChoixFin().setValue(LocalDate.now());
+        }else{
+            url += "/" + echantillonnage + "/" + (dateDebutFormat.getTime() / 1000) + "/" + (dateFinFormat.getTime() / 1000);
+        }
         navigateurDesVues.getVueHumidite().actualiserTableau(humiditeDAO.listerHumiditeSelonURL(url));
 
         LOGGER.log(Level.INFO, "Get XML depuis URL : "+ url.toString());

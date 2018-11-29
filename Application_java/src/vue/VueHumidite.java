@@ -18,6 +18,7 @@ import modele.Humidites;
 import modele.LigneTableau;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 
 import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
@@ -68,8 +69,8 @@ public class VueHumidite extends Scene {
 
         dateChoixDebut = new DatePicker();
         dateChoixFin = new DatePicker();
-        dateChoixDebut.setValue(LocalDate.now());
-        dateChoixFin.setValue(LocalDate.now().plusDays(7));
+        /*dateChoixDebut.setValue(LocalDate.of(2009,3,8));
+        dateChoixFin.setValue(LocalDate.now());*/
 
         actionActualiser = new Button("Actualiser");
         actionActualiser.setOnMouseClicked(new EventHandler<MouseEvent>() {
