@@ -126,17 +126,17 @@ public class VueHumidite extends Scene {
         coloneDate.setResizable(false);
         coloneDate.setMinWidth(192);
 
-        TableColumn coloneMoyenne = new TableColumn("Moyenne");
+        TableColumn coloneMoyenne = new TableColumn("Moyenne (en %)");
         coloneMoyenne.setCellValueFactory(new PropertyValueFactory<>("moyene"));
         coloneMoyenne.setResizable(false);
         coloneMoyenne.setMinWidth(192);
 
-        TableColumn coloneMin = new TableColumn("Minimum");
+        TableColumn coloneMin = new TableColumn("Minimum (en %)");
         coloneMin.setCellValueFactory(new PropertyValueFactory<>("minimum"));
         coloneMin.setResizable(false);
         coloneMin.setMinWidth(192);
 
-        TableColumn coloneMax = new TableColumn("Maximum");
+        TableColumn coloneMax = new TableColumn("Maximum (en %)");
         coloneMax.setCellValueFactory(new PropertyValueFactory<>("maximum"));
         coloneMax.setResizable(false);
         coloneMax.setMinWidth(192);
