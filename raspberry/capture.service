@@ -1,0 +1,15 @@
+[Unit]
+Description=serveur node pour capture
+After=network.target 
+
+[Service]
+Type=simple
+User=capture
+Environment=NODE_PORT=8082
+WorkingDirectory=/home/capture/projet-capture-serveur-nodejs/
+ExecStart=/usr/bin/node /home/capture/projet-capture-serveur-nodejs/start.js
+Restart=on-failure
+
+
+[Install]
+WantedBy=multi-user.target
